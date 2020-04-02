@@ -13,6 +13,9 @@ ExecStart=@bindir@/open5gs-pcrfd -c @sysconfdir@/open5gs/pcrf.yaml
 RestartSec=2
 RestartPreventExitStatus=1
 ExecReload=/bin/kill -HUP $MAINPID
+RuntimeDirectory=open5gs-pcrfd
+ExecStartPost=/bin/sh -c 'echo $MAINPID > /var/run/open5gs-pcrfd/pid'
+ExecStopPost=/bin/rm /var/run/open5gs-pcrfd/pid
 
 [Install]
 WantedBy=multi-user.target
