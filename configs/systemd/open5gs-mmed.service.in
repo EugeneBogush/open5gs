@@ -13,6 +13,9 @@ ExecStart=@bindir@/open5gs-mmed -c @sysconfdir@/open5gs/mme.yaml
 RestartSec=2
 RestartPreventExitStatus=1
 ExecReload=/bin/kill -HUP $MAINPID
+RuntimeDirectory=open5gs-mmed
+ExecStartPost=/bin/sh -c 'echo $MAINPID > /var/run/open5gs-mmed/pid'
+ExecStopPost=/bin/rm /var/run/open5gs-mmed/pid
 
 [Install]
 WantedBy=multi-user.target
