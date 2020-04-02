@@ -13,6 +13,9 @@ ExecStart=@bindir@/open5gs-hssd -c @sysconfdir@/open5gs/hss.yaml
 RestartSec=2
 RestartPreventExitStatus=1
 ExecReload=/bin/kill -HUP $MAINPID
+RuntimeDirectory=open5gs-hssd
+ExecStartPost=/bin/sh -c 'echo $MAINPID > /var/run/open5gs-hssd/pid'
+ExecStopPost=/bin/rm /var/run/open5gs-hssd/pid
 
 [Install]
 WantedBy=multi-user.target
